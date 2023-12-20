@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>对接文档</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<#--    <link rel="stylesheet" href="webjars/css/katex.min.css">-->
+    <style>
+        code[class*=language-], pre[class*=language-] {
+            color: #333;
+            background: 0 0;
+            font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            text-align: left;
+            white-space: pre;
+            word-spacing: normal;
+            word-break: normal;
+            word-wrap: normal;
+            line-height: 1.4;
+            -moz-tab-size: 8;
+            -o-tab-size: 8;
+            tab-size: 8;
+            -webkit-hyphens: none;
+            -moz-hyphens: none;
+            -ms-hyphens: none;
+            hyphens: none
+        }
+
+        pre[class*=language-] {
+            padding: .8em;
+            overflow: auto;
+            border-radius: 3px;
+            background: #f5f5f5
+        }
+
+        :not(pre) > code[class*=language-] {
+            padding: .1em;
+            border-radius: .3em;
+            white-space: normal;
+            background: #f5f5f5
+        }
+
+        .token.blockquote, .token.comment {
+            color: #969896
+        }
+
+        .token.cdata {
+            color: #183691
+        }
+
+        .token.doctype, .token.macro.property, .token.punctuation, .token.variable {
+            color: #333
+        }
+
+        .token.builtin, .token.important, .token.keyword, .token.operator, .token.rule {
+            color: #a71d5d
+        }
+
+        .token.attr-value, .token.regex, .token.string, .token.url {
+            color: #183691
+        }
+
+        .token.atrule, .token.boolean, .token.code, .token.command, .token.constant, .token.entity, .token.number, .token.property, .token.symbol {
+            color: #0086b3
+        }
+
+        .token.prolog, .token.selector, .token.tag {
+            color: #63a35c
+        }
+
+        .token.attr-name, .token.class, .token.class-name, .token.function, .token.id, .token.namespace, .token.pseudo-class, .token.pseudo-element, .token.url-reference .token.variable {
+            color: #795da3
+        }
+
+        .token.entity {
+            cursor: help
+        }
+
+        .token.title, .token.title .token.punctuation {
+            font-weight: 700;
+            color: #1d3e81
+        }
+
+        .token.list {
+            color: #ed6a43
+        }
+
+        .token.inserted {
+            background-color: #eaffea;
+            color: #55a532
+        }
+
+        .token.deleted {
+            background-color: #ffecec;
+            color: #bd2c00
+        }
+
+        .token.bold {
+            font-weight: 700
+        }
+
+        .token.italic {
+            font-style: italic
+        }
+
+        .language-json .token.property {
+            color: #183691
+        }
+
+        .language-markup .token.tag .token.punctuation {
+            color: #333
+        }
+
+        .language-css .token.function, code.language-css {
+            color: #0086b3
+        }
+
+        .language-yaml .token.atrule {
+            color: #63a35c
+        }
+
+        code.language-yaml {
+            color: #183691
+        }
+
+        .language-ruby .token.function {
+            color: #333
+        }
+
+        .language-markdown .token.url {
+            color: #795da3
+        }
+
+        .language-makefile .token.symbol {
+            color: #795da3
+        }
+
+        .language-makefile .token.variable {
+            color: #183691
+        }
+
+        .language-makefile .token.builtin {
+            color: #0086b3
+        }
+
+        .language-bash .token.keyword {
+            color: #0086b3
+        }
+
+        pre[data-line] {
+            position: relative;
+            padding: 1em 0 1em 3em
+        }
+
+        pre[data-line] .line-highlight-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: transparent;
+            display: block;
+            width: 100%
+        }
+
+        pre[data-line] .line-highlight {
+            position: absolute;
+            left: 0;
+            right: 0;
+            padding: inherit 0;
+            margin-top: 1em;
+            background: hsla(24, 20%, 50%, .08);
+            background: linear-gradient(to right, hsla(24, 20%, 50%, .1) 70%, hsla(24, 20%, 50%, 0));
+            pointer-events: none;
+            line-height: inherit;
+            white-space: pre
+        }
+
+        pre[data-line] .line-highlight:before, pre[data-line] .line-highlight[data-end]:after {
+            content: attr(data-start);
+            position: absolute;
+            top: .4em;
+            left: .6em;
+            min-width: 1em;
+            padding: 0 .5em;
+            background-color: hsla(24, 20%, 50%, .4);
+            color: #f4f1ef;
+            font: bold 65%/1.5 sans-serif;
+            text-align: center;
+            vertical-align: .3em;
+            border-radius: 999px;
+            text-shadow: none;
+            box-shadow: 0 1px #fff
+        }
+
+        pre[data-line] .line-highlight[data-end]:after {
+            content: attr(data-end);
+            top: auto;
+            bottom: .4em
+        }
+
+        html body {
+            font-family: 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+            overflow: initial;
+            box-sizing: border-box;
+            word-wrap: break-word
+        }
+
+        html body > :first-child {
+            margin-top: 0
+        }
+
+        html body h1, html body h2, html body h3, html body h4, html body h5, html body h6 {
+            line-height: 1.2;
+            margin-top: 1em;
+            margin-bottom: 16px;
+            color: #000
+        }
+
+        html body h1 {
+            font-size: 2.25em;
+            font-weight: 300;
+            padding-bottom: .3em
+        }
+
+        html body h2 {
+            font-size: 1.75em;
+            font-weight: 400;
+            padding-bottom: .3em
+        }
+
+        html body h3 {
+            font-size: 1.5em;
+            font-weight: 500
+        }
+
+        html body h4 {
+            font-size: 1.25em;
+            font-weight: 600
+        }
+
+        html body h5 {
+            font-size: 1.1em;
+            font-weight: 600
+        }
+
+        html body h6 {
+            font-size: 1em;
+            font-weight: 600
+        }
+
+        html body h1, html body h2, html body h3, html body h4, html body h5 {
+            font-weight: 600
+        }
+
+        html body h5 {
+            font-size: 1em
+        }
+
+        html body h6 {
+            color: #5c5c5c
+        }
+
+        html body strong {
+            color: #000
+        }
+
+        html body del {
+            color: #5c5c5c
+        }
+
+        html body a:not([href]) {
+            color: inherit;
+            text-decoration: none
+        }
+
+        html body a {
+            color: #08c;
+            text-decoration: none
+        }
+
+        html body a:hover {
+            color: #00a3f5;
+            text-decoration: none
+        }
+
+        html body img {
+            max-width: 100%
+        }
+
+        html body > p {
+            margin-top: 0;
+            margin-bottom: 16px;
+            word-wrap: break-word
+        }
+
+        html body > ol, html body > ul {
+            margin-bottom: 16px
+        }
+
+        html body ol, html body ul {
+            padding-left: 2em
+        }
+
+        html body ol.no-list, html body ul.no-list {
+            padding: 0;
+            list-style-type: none
+        }
+
+        html body ol ol, html body ol ul, html body ul ol, html body ul ul {
+            margin-top: 0;
+            margin-bottom: 0
+        }
+
+        html body li {
+            margin-bottom: 0
+        }
+
+        html body li.task-list-item {
+            list-style: none
+        }
+
+        html body li > p {
+            margin-top: 0;
+            margin-bottom: 0
+        }
+
+        html body .task-list-item-checkbox {
+            margin: 0 .2em .25em -1.8em;
+            vertical-align: middle
+        }
+
+        html body .task-list-item-checkbox:hover {
+            cursor: pointer
+        }
+
+        html body blockquote {
+            margin: 16px 0;
+            font-size: inherit;
+            padding: 0 15px;
+            color: #5c5c5c;
+            background-color: #f0f0f0;
+            border-left: 4px solid #d6d6d6
+        }
+
+        html body blockquote > :first-child {
+            margin-top: 0
+        }
+
+        html body blockquote > :last-child {
+            margin-bottom: 0
+        }
+
+        html body hr {
+            height: 4px;
+            margin: 32px 0;
+            background-color: #d6d6d6;
+            border: 0 none
+        }
+
+        html body table {
+            margin: 10px 0 15px 0;
+            border-collapse: collapse;
+            border-spacing: 0;
+            display: block;
+            width: 100%;
+            overflow: auto;
+            word-break: normal;
+            word-break: keep-all
+        }
+
+        html body table th {
+            font-weight: 700;
+            color: #000
+        }
+
+        html body table td, html body table th {
+            border: 1px solid #d6d6d6;
+            padding: 6px 13px
+        }
+
+        html body dl {
+            padding: 0
+        }
+
+        html body dl dt {
+            padding: 0;
+            margin-top: 16px;
+            font-size: 1em;
+            font-style: italic;
+            font-weight: 700
+        }
+
+        html body dl dd {
+            padding: 0 16px;
+            margin-bottom: 16px
+        }
+
+        html body code {
+            font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
+            font-size: .85em;
+            color: #000;
+            background-color: #f0f0f0;
+            border-radius: 3px;
+            padding: .2em 0
+        }
+
+        html body code::after, html body code::before {
+            letter-spacing: -.2em;
+            content: '\00a0'
+        }
+
+        html body pre > code {
+            padding: 0;
+            margin: 0;
+            word-break: normal;
+            white-space: pre;
+            background: 0 0;
+            border: 0
+        }
+
+        html body .highlight {
+            margin-bottom: 16px
+        }
+
+        html body .highlight pre, html body pre {
+            padding: 1em;
+            overflow: auto;
+            line-height: 1.45;
+            border: #d6d6d6;
+            border-radius: 3px
+        }
+
+        html body .highlight pre {
+            margin-bottom: 0;
+            word-break: normal
+        }
+
+        html body pre code, html body pre tt {
+            display: inline;
+            max-width: initial;
+            padding: 0;
+            margin: 0;
+            overflow: initial;
+            line-height: inherit;
+            word-wrap: normal;
+            background-color: transparent;
+            border: 0
+        }
+
+        html body pre code:after, html body pre code:before, html body pre tt:after, html body pre tt:before {
+            content: normal
+        }
+
+        html body blockquote, html body dl, html body ol, html body p, html body pre, html body ul {
+            margin-top: 0;
+            margin-bottom: 16px
+        }
+
+        html body kbd {
+            color: #000;
+            border: 1px solid #d6d6d6;
+            border-bottom: 2px solid #c7c7c7;
+            padding: 2px 4px;
+            background-color: #f0f0f0;
+            border-radius: 3px
+        }
+
+        @media print {
+            html body {
+                background-color: #fff
+            }
+
+            html body h1, html body h2, html body h3, html body h4, html body h5, html body h6 {
+                color: #000;
+                page-break-after: avoid
+            }
+
+            html body blockquote {
+                color: #5c5c5c
+            }
+
+            html body pre {
+                page-break-inside: avoid
+            }
+
+            html body table {
+                display: table
+            }
+
+            html body img {
+                display: block;
+                max-width: 100%;
+                max-height: 100%
+            }
+
+            html body code, html body pre {
+                word-wrap: break-word;
+                white-space: pre
+            }
+        }
+
+        .markdown-preview {
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box
+        }
+
+        .markdown-preview ul {
+            list-style: disc
+        }
+
+        .markdown-preview ul ul {
+            list-style: circle
+        }
+
+        .markdown-preview ul ul ul {
+            list-style: square
+        }
+
+        .markdown-preview ol {
+            list-style: decimal
+        }
+
+        .markdown-preview ol ol, .markdown-preview ul ol {
+            list-style-type: lower-roman
+        }
+
+        .markdown-preview ol ol ol, .markdown-preview ol ul ol, .markdown-preview ul ol ol, .markdown-preview ul ul ol {
+            list-style-type: lower-alpha
+        }
+
+        .markdown-preview .newpage, .markdown-preview .pagebreak {
+            page-break-before: always
+        }
+
+        .markdown-preview pre.line-numbers {
+            position: relative;
+            padding-left: 3.8em;
+            counter-reset: linenumber
+        }
+
+        .markdown-preview pre.line-numbers > code {
+            position: relative
+        }
+
+        .markdown-preview pre.line-numbers .line-numbers-rows {
+            position: absolute;
+            pointer-events: none;
+            top: 1em;
+            font-size: 100%;
+            left: 0;
+            width: 3em;
+            letter-spacing: -1px;
+            border-right: 1px solid #999;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none
+        }
+
+        .markdown-preview pre.line-numbers .line-numbers-rows > span {
+            pointer-events: none;
+            display: block;
+            counter-increment: linenumber
+        }
+
+        .markdown-preview pre.line-numbers .line-numbers-rows > span:before {
+            content: counter(linenumber);
+            color: #999;
+            display: block;
+            padding-right: .8em;
+            text-align: right
+        }
+
+        .markdown-preview .mathjax-exps .MathJax_Display {
+            text-align: center !important
+        }
+
+        .markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group {
+            display: none
+        }
+
+        .markdown-preview:not([data-for=preview]) .code-chunk .status {
+            display: none
+        }
+
+        .markdown-preview:not([data-for=preview]) .code-chunk .output-div {
+            margin-bottom: 16px
+        }
+
+        .markdown-preview .md-toc {
+            padding: 0
+        }
+
+        .markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link {
+            display: inline;
+            padding: .25rem 0
+        }
+
+        .markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div, .markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p {
+            display: inline
+        }
+
+        .markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link {
+            font-weight: 800
+        }
+
+        .scrollbar-style::-webkit-scrollbar {
+            width: 8px
+        }
+
+        .scrollbar-style::-webkit-scrollbar-track {
+            border-radius: 10px;
+            background-color: transparent
+        }
+
+        .scrollbar-style::-webkit-scrollbar-thumb {
+            border-radius: 5px;
+            background-color: rgba(150, 150, 150, .66);
+            border: 4px solid rgba(150, 150, 150, .66);
+            background-clip: content-box
+        }
+
+        html body[for=html-export]:not([data-presentation-mode]) {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            margin: 0;
+            padding: 0;
+            overflow: auto
+        }
+
+        html body[for=html-export]:not([data-presentation-mode]) .markdown-preview {
+            position: relative;
+            top: 0;
+            min-height: 100vh
+        }
+
+        @media screen and (min-width: 914px) {
+            html body[for=html-export]:not([data-presentation-mode]) .markdown-preview {
+                padding: 2em calc(50% - 457px + 2em)
+            }
+        }
+
+        @media screen and (max-width: 914px) {
+            html body[for=html-export]:not([data-presentation-mode]) .markdown-preview {
+                padding: 2em
+            }
+        }
+
+        @media screen and (max-width: 450px) {
+            html body[for=html-export]:not([data-presentation-mode]) .markdown-preview {
+                font-size: 14px !important;
+                padding: 1em
+            }
+        }
+
+        @media print {
+            html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn {
+                display: none
+            }
+        }
+
+        html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn {
+            position: fixed;
+            bottom: 8px;
+            left: 8px;
+            font-size: 28px;
+            cursor: pointer;
+            color: inherit;
+            z-index: 99;
+            width: 32px;
+            text-align: center;
+            opacity: .4
+        }
+
+        html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn {
+            opacity: 1
+        }
+
+        html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 300px;
+            height: 100%;
+            padding: 32px 0 48px 0;
+            font-size: 14px;
+            box-shadow: 0 0 4px rgba(150, 150, 150, .33);
+            box-sizing: border-box;
+            overflow: auto;
+            background-color: inherit
+        }
+
+        html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar {
+            width: 8px
+        }
+
+        html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track {
+            border-radius: 10px;
+            background-color: transparent
+        }
+
+        html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb {
+            border-radius: 5px;
+            background-color: rgba(150, 150, 150, .66);
+            border: 4px solid rgba(150, 150, 150, .66);
+            background-clip: content-box
+        }
+
+        html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a {
+            text-decoration: none
+        }
+
+        html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc {
+            padding: 0 16px
+        }
+
+        html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link {
+            display: inline;
+            padding: .25rem 0
+        }
+
+        html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div, html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p {
+            display: inline
+        }
+
+        html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link {
+            font-weight: 800
+        }
+
+        html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview {
+            left: 300px;
+            width: calc(100% - 300px);
+            padding: 2em calc(50% - 457px - 300px / 2);
+            margin: 0;
+            box-sizing: border-box
+        }
+
+        @media screen and (max-width: 1274px) {
+            html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview {
+                padding: 2em
+            }
+        }
+
+        @media screen and (max-width: 450px) {
+            html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview {
+                width: 100%
+            }
+        }
+
+        html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview {
+            left: 50%;
+            transform: translateX(-50%)
+        }
+
+        html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc {
+            display: none
+        }
+
+        /* Please visit the URL below for more information: */
+        /*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+    </style>
+    <!-- The content below will be included at the end of the <head> element. -->
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            // your code here
+        });
+    </script>
+</head>
+<body for="html-export">
+
+
+<div class="crossnote markdown-preview  ">
+    <h1>对接文档</h1>
+    <div class="md-toc">
+
+        <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
+            <a href="#协议规则" class="md-toc-link">
+                <p>协议规则</p>
+            </a></div>
+        <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
+            <a href="#统一下单" class="md-toc-link">
+                <p>统一下单</p>
+            </a></div>
+        <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
+            <a href="#查询订单" class="md-toc-link">
+                <p>查询订单</p>
+            </a></div>
+        <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
+            <a href="#支付通知" class="md-toc-link">
+                <p>支付通知</p>
+
+            </a></div>
+        <div class="md-toc-link-wrapper" style="padding:0;;display:list-item;list-style:square;margin-left:18px">
+            <a href="#返回码" class="md-toc-link">
+                <p>返回码</p>
+            </a></div>
+    </div>
+
+    <h2 id="协议规则">协议规则 </h2>
+    <p>传输方式：采用HTTP传输(生产环境建议HTTPS)<br>
+        提交方式：<code>POST</code> 或 <code>GET</code><br>
+        内容类型：<code>application/json</code><br>
+        字符编码：<code>UTF-8</code><br>
+        签名算法：<code>MD5</code></p>
+    <h2 id="参数规范">参数规范 </h2>
+    <p>交易金额：默认为人民币交易，单位为元，参数值不能带小数。<br>
+        时间参数：所有涉及时间参数均使用精确到毫秒的13位数值，如：1622016572190。时间戳具体是指从格林尼治时间1970年01月01日00时00分00秒起至现在的毫秒数。</p>
+    <h2 id="签名算法">签名算法 </h2>
+    <p><code>签名生成的通用步骤如下</code></p>
+    <p><em><strong>第一步：</strong></em>
+        设所有发送或者接收到的数据为集合M，将集合M内非空参数值的参数按照参数名ASCII码从小到大排序（字典序），使用URL键值对的格式（即key1=value1&amp;key2=value2…）拼接成字符串stringA。<br>
+        特别注意以下重要规则：<br>
+        ◆ 参数名ASCII码从小到大排序（字典序）；<br>
+        ◆ 如果参数的值为空不参与签名；<br>
+        ◆ 参数名区分大小写；<br>
+        ◆ 验证调用返回或支付中心主动通知签名时，传送的sign参数不参与签名，将生成的签名与该sign值作校验。<br>
+        ◆ 支付中心接口可能增加字段，验证签名时必须支持增加的扩展字段</p>
+    <p><em><strong>第二步：</strong></em> 在stringA最后拼接上key<code>[即 StringA +"&amp;key=" + 私钥 ]</code>
+        得到stringSignTemp字符串，并对stringSignTemp进行MD5运算，再将得到的字符串所有字符转换为大写，得到sign值signValue。</p>
+    <p>如请求支付系统参数如下：</p>
+    <pre data-role="codeBlock" data-info="java" class="language-java java"><code><span class="token class-name">Map</span> signMap <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+signMap<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"platId"</span><span class="token punctuation">,</span> <span class="token string">"1000"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+signMap<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"mchOrderNo"</span><span class="token punctuation">,</span> <span class="token string">"P0123456789101"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+signMap<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"amount"</span><span class="token punctuation">,</span> <span class="token string">"10000"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+signMap<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"clientIp"</span><span class="token punctuation">,</span> <span class="token string">"192.168.0.111"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+signMap<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"notifyUrl"</span><span class="token punctuation">,</span> <span class="token string">"https://www.baidu.com"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+signMap<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"reqTime"</span><span class="token punctuation">,</span> <span class="token string">"20190723141000"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+signMap<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"version"</span><span class="token punctuation">,</span> <span class="token string">"1.0"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+    <p><code>待签名值</code>：<br>
+        amount=10000&amp;clientIp=192.168.0.111&amp;mchOrderNo=P0123456789101&amp;notifyUrl=<a
+                href="https://www.baidu.com">https://www.baidu.com</a>&amp;platId=1000&amp;reqTime=20190723141000&amp;version=1.0&amp;key=EWEFD123RGSRETYDFNGFGFGSHDFGH</p>
+    <p><code>签名结果</code>：4A5078DABBCE0D9C4E7668DACB96FF7A</p>
+    <p><code>最终请求支付系统参数</code>：amount=10000&amp;clientIp=192.168.0.111&amp;mchOrderNo=P0123456789101&amp;notifyUrl=<a
+            href="https://www.baidu.com">https://www.baidu.com</a>&amp;platId=1000&amp;reqTime=20190723141000&amp;version=1.0&amp;sign=4A5078DABBCE0D9C4E7668DACB96FF7A
+    </p>
+
+    <h2 id="统一下单">统一下单 </h2>
+    <p>商户通过统一下单接口发起支付收款订单。</p>
+    <blockquote>
+        <p>接口说明</p>
+    </blockquote>
+    <p>请求URL：<a href="系统链接/api/pay/unifiedOrder">系统链接/api/pay/unifiedOrder</a></p>
+    <p>请求方式：<code>POST</code></p>
+    <p>请求类型：<code>application/json</code> 或 <code>application/x-www-form-urlencoded</code></p>
+    <blockquote>
+        <p>请求参数</p>
+    </blockquote>
+    <table>
+        <thead>
+        <tr>
+            <th>字段名</th>
+            <th>变量名</th>
+            <th>必填</th>
+            <th>类型</th>
+            <th>示例值</th>
+            <th>描述</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>商户号</td>
+            <td>mchNo</td>
+            <td>是</td>
+            <td>String(30)</td>
+            <td>M1621873433953</td>
+            <td>商户号</td>
+        </tr>
+        <tr>
+            <td>应用ID</td>
+            <td>appId</td>
+            <td>是</td>
+            <td>String(24)</td>
+            <td>60cc09bce4b0f1c0b83761c9</td>
+            <td>应用ID</td>
+        </tr>
+        <tr>
+            <td>商户订单号</td>
+            <td>mchOrderNo</td>
+            <td>是</td>
+            <td>String(30)</td>
+            <td>20160427210604000490</td>
+            <td>商户生成的订单号</td>
+        </tr>
+        <tr>
+            <td>产品编码</td>
+            <td>productCode</td>
+            <td>是</td>
+            <td>String(30)</td>
+            <td>10001</td>
+            <td>产品编码，具体见系统对接信息</td>
+        </tr>
+        <tr>
+            <td>支付金额</td>
+            <td>amount</td>
+            <td>是</td>
+            <td>int</td>
+            <td>100</td>
+            <td>支付金额,单位元</td>
+        </tr>
+        <tr>
+            <td>货币代码</td>
+            <td>currency</td>
+            <td>是</td>
+            <td>String(3)</td>
+            <td>cny</td>
+            <td>三位货币代码,人民币:cny</td>
+        </tr>
+        <tr>
+            <td>客户端IP</td>
+            <td>clientIp</td>
+            <td>否</td>
+            <td>String(32)</td>
+            <td>210.73.10.148</td>
+            <td>客户端IPV4地址</td>
+        </tr>
+        <tr>
+            <td>异步通知地址</td>
+            <td>notifyUrl</td>
+            <td>否</td>
+            <td>String(128)</td>
+            <td><a href="https://www.baidu.com/notify.htm">https://www.baidu.com/notify.htm</a></td>
+            <td>支付结果异步回调URL,只有传了该值才会发起回调</td>
+        </tr>
+        <tr>
+            <td>失效时间</td>
+            <td>expiredTime</td>
+            <td>否</td>
+            <td>int</td>
+            <td>3600</td>
+            <td>订单失效时间,单位秒,默认2小时.订单在(创建时间+失效时间)后失效</td>
+        </tr>
+        <tr>
+            <td>扩展参数</td>
+            <td>extParam</td>
+            <td>否</td>
+            <td>String(512)</td>
+            <td>134586944573118714</td>
+            <td>商户扩展参数,回调时会原样返回</td>
+        </tr>
+        <tr>
+            <td>请求时间</td>
+            <td>reqTime</td>
+            <td>是</td>
+            <td>long</td>
+            <td>1622016572190</td>
+            <td>请求接口时间,13位时间戳</td>
+        </tr>
+        <tr>
+            <td>接口版本</td>
+            <td>version</td>
+            <td>是</td>
+            <td>String(3)</td>
+            <td>1.0</td>
+            <td>接口版本号，固定：1.0</td>
+        </tr>
+        <tr>
+            <td>签名</td>
+            <td>sign</td>
+            <td>是</td>
+            <td>String(32)</td>
+            <td>C380BEC2BFD727A4B6845133519F3AD6</td>
+            <td>签名值，详见签名算法</td>
+        </tr>
+        <tr>
+            <td>签名类型</td>
+            <td>signType</td>
+            <td>是</td>
+            <td>String(32)</td>
+            <td>MD5</td>
+            <td>签名类型，目前只支持MD5方式</td>
+        </tr>
+        </tbody>
+    </table>
+    <p><code>请求示例数据</code></p>
+    <pre data-role="codeBlock" data-info="json" class="language-json json">
+        <code>
+            <span class="token punctuation">{</span>
+            <span class="token property">"amount"</span><span class="token operator">:</span> <span class="token number">100</span><span class="token punctuation">,</span>
+            <span class="token property">"extParam"</span><span class="token operator">:</span> <span  class="token string">""</span><span class="token punctuation">,</span>
+            <span class="token property">"mchOrderNo"</span><span class="token operator">:</span> <span class="token string">"mho1624005107281"</span><span class="token punctuation">,</span>
+            <span class="token property">"productCode"</span><span class="token operator">:</span> <span class="token string">"10001"</span><span
+                    class="token punctuation">,</span>
+              <span class="token property">"sign"</span><span class="token operator">:</span> <span class="token string">"84F606FA25A6EC4783BECC08D4FDC681"</span><span
+                            class="token punctuation">,</span>
+              <span class="token property">"reqTime"</span><span class="token operator">:</span> <span class="token string">"1624005107"</span><span
+                            class="token punctuation">,</span>
+              <span class="token property">"version"</span><span class="token operator">:</span> <span
+                            class="token string">"1.0"</span><span class="token punctuation">,</span>
+              <span class="token property">"appId"</span><span class="token operator">:</span> <span class="token string">"60cc09bce4b0f1c0b83761c9"</span><span
+                            class="token punctuation">,</span>
+              <span class="token property">"clientIp"</span><span class="token operator">:</span> <span class="token string">"192.166.1.132"</span><span
+                            class="token punctuation">,</span>
+              <span class="token property">"notifyUrl"</span><span class="token operator">:</span> <span class="token string">"https://www.baidu.com"</span><span
+                            class="token punctuation">,</span>
+              <span class="token property">"signType"</span><span class="token operator">:</span> <span
+                            class="token string">"MD5"</span><span class="token punctuation">,</span>
+              <span class="token property">"currency"</span><span class="token operator">:</span> <span
+                            class="token string">"cny"</span><span class="token punctuation">,</span>
+              <span class="token property">"mchNo"</span><span class="token operator">:</span> <span class="token string">"M1623984572"</span><span
+                            class="token punctuation">,</span>
+            <span class="token punctuation">}</span>
+        </code>
+    </pre>
+    <div class="code-chunk" data-id="code-chunk-id-0" data-cmd="toc">
+        <div class="input-div">
+            <div class="code-chunk-btn-group">
+                <div class="run-btn btn btn-xs btn-primary"><span>▶︎</span></div>
+                <div class="run-all-btn btn btn-xs btn-primary">all</div>
+            </div>
+            <div class="status">running...</div>
+        </div>
+        <div class="output-div"></div>
+    </div>
+    <blockquote>
+        <p>返回参数</p>
+    </blockquote>
+    <table>
+        <thead>
+        <tr>
+            <th>字段名</th>
+            <th>变量名</th>
+            <th>必填</th>
+            <th>类型</th>
+            <th>示例值</th>
+            <th>描述</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>返回状态</td>
+            <td>code</td>
+            <td>是</td>
+            <td>int</td>
+            <td>0</td>
+            <td>0-处理成功，其他-处理有误，详见错误码</td>
+        </tr>
+        <tr>
+            <td>返回信息</td>
+            <td>msg</td>
+            <td>否</td>
+            <td>String(128)</td>
+            <td>签名失败</td>
+            <td>具体错误原因，例如：签名失败、参数格式校验错误</td>
+        </tr>
+        <tr>
+            <td>签名信息</td>
+            <td>sign</td>
+            <td>否</td>
+            <td>String(32)</td>
+            <td>CCD9083A6DAD9A2DA9F668C3D4517A84</td>
+            <td>对data内数据签名,如data为空则不返回</td>
+        </tr>
+        <tr>
+            <td>返回数据</td>
+            <td>data</td>
+            <td>否</td>
+            <td>String(512)</td>
+            <td>{}</td>
+            <td>返回下单数据,json格式数据</td>
+        </tr>
+        </tbody>
+    </table>
+    <p><code>data数据格式</code></p>
+    <table>
+        <thead>
+        <tr>
+            <th>字段名</th>
+            <th>变量名</th>
+            <th>必填</th>
+            <th>类型</th>
+            <th>示例值</th>
+            <th>描述</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>支付订单号</td>
+            <td>payOrderId</td>
+            <td>是</td>
+            <td>String(30)</td>
+            <td>U12021022311124442600</td>
+            <td>返回支付系统订单号</td>
+        </tr>
+        <tr>
+            <td>商户订单号</td>
+            <td>mchOrderNo</td>
+            <td>是</td>
+            <td>String(30)</td>
+            <td>20160427210604000490</td>
+            <td>返回商户传入的订单号</td>
+        </tr>
+        <tr>
+            <td>订单状态</td>
+            <td>orderState</td>
+            <td>是</td>
+            <td>int</td>
+            <td>2</td>
+            <td>支付订单状态<br>0-订单生成<br>1-支付中<br>2-支付成功<br>3-支付失败<br>6-订单关闭</td>
+        </tr>
+        <tr>
+            <td>支付数据类型</td>
+            <td>payDataType</td>
+            <td>是</td>
+            <td>String</td>
+            <td>payUrl</td>
+            <td>支付参数类型<br>payUrl-跳转链接的方式<br></td>
+            </td>
+        </tr>
+        <tr>
+            <td>支付数据</td>
+            <td>payData</td>
+            <td>否</td>
+            <td>String</td>
+            <td><a href="http://www.baidu.com/pay.html">http://www.baidu.com/pay.html</a></td>
+            <td>发起支付链接地址</td>
+        </tr>
+        </tbody>
+    </table>
+    <p><code>返回示例数据</code></p>
+    <pre data-role="codeBlock" data-info="json" class="language-json json"><code><span
+            class="token punctuation">{</span>
+  <span class="token property">"code"</span><span class="token operator">:</span> <span
+                class="token number">0</span><span class="token punctuation">,</span>
+  <span class="token property">"data"</span><span class="token operator">:</span> <span
+                class="token punctuation">{</span>
+    <span class="token property">"mchOrderNo"</span><span class="token operator">:</span> <span class="token string">"mho1624005752661"</span><span
+                class="token punctuation">,</span>
+    <span class="token property">"orderState"</span><span class="token operator">:</span> <span
+                class="token number">2</span><span class="token punctuation">,</span>
+    <span class="token property">"payOrderId"</span><span class="token operator">:</span> <span class="token string">"P202106181642329900002"</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">"msg"</span><span class="token operator">:</span> <span
+                class="token string">"SUCCESS"</span><span class="token punctuation">,</span>
+  <span class="token property">"sign"</span><span class="token operator">:</span> <span class="token string">"F4DA202C516D1F33A12F1E547C5004FD"</span>
+<span class="token punctuation">}</span>
+</code></pre>
+
+    <h2 id="查询订单">查询订单 </h2>
+    <p>商户通过该接口查询订单，系统会返回订单最新的数据</p>
+    <blockquote>
+        <p>接口说明</p>
+    </blockquote>
+    <p>请求URL：<a href="系统链接/api/pay/query">系统链接/api/pay/query</a></p>
+    <p>请求方式：<code>POST</code></p>
+    <p>请求类型：<code>application/json</code> 或 <code>application/x-www-form-urlencoded</code></p>
+    <blockquote>
+        <p>请求参数</p>
+    </blockquote>
+    <table>
+        <thead>
+        <tr>
+            <th>字段名</th>
+            <th>变量名</th>
+            <th>必填</th>
+            <th>类型</th>
+            <th>示例值</th>
+            <th>描述</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>商户号</td>
+            <td>mchNo</td>
+            <td>是</td>
+            <td>String(30)</td>
+            <td>M1621873433953</td>
+            <td>商户号</td>
+        </tr>
+        <tr>
+            <td>应用ID</td>
+            <td>appId</td>
+            <td>是</td>
+            <td>String(24)</td>
+            <td>60cc09bce4b0f1c0b83761c9</td>
+            <td>应用ID</td>
+        </tr>
+        <tr>
+            <td>支付订单号</td>
+            <td>payOrderId</td>
+            <td>是</td>
+            <td>String(30)</td>
+            <td>P20160427210604000490</td>
+            <td>支付中心生成的订单号，与mchOrderNo二者传一即可</td>
+        </tr>
+        <tr>
+            <td>商户订单号</td>
+            <td>mchOrderNo</td>
+            <td>是</td>
+            <td>String(30)</td>
+            <td>20160427210604000490</td>
+            <td>商户生成的订单号，与payOrderId二者传一即可</td>
+        </tr>
+        <tr>
+            <td>请求时间</td>
+            <td>reqTime</td>
+            <td>是</td>
+            <td>long</td>
+            <td>1622016572190</td>
+            <td>请求接口时间,13位时间戳</td>
+        </tr>
+        <tr>
+            <td>接口版本</td>
+            <td>version</td>
+            <td>是</td>
+            <td>String(3)</td>
+            <td>1.0</td>
+            <td>接口版本号，固定：1.0</td>
+        </tr>
+        <tr>
+            <td>签名</td>
+            <td>sign</td>
+            <td>是</td>
+            <td>String(32)</td>
+            <td>C380BEC2BFD727A4B6845133519F3AD6</td>
+            <td>签名值，详见签名算法</td>
+        </tr>
+        <tr>
+            <td>签名类型</td>
+            <td>signType</td>
+            <td>是</td>
+            <td>String(32)</td>
+            <td>MD5</td>
+            <td>签名类型，目前只支持MD5方式</td>
+        </tr>
+        </tbody>
+    </table>
+    <p><code>请求示例数据</code></p>
+    <pre data-role="codeBlock" data-info="json" class="language-json json"><code><span
+            class="token punctuation">{</span>
+  <span class="token property">"payOrderId"</span><span class="token operator">:</span> <span class="token string">"P202106181104177050002"</span><span
+                class="token punctuation">,</span>
+  <span class="token property">"appId"</span><span class="token operator">:</span> <span class="token string">"60cc09bce4b0f1c0b83761c9"</span><span
+                class="token punctuation">,</span>
+  <span class="token property">"sign"</span><span class="token operator">:</span> <span class="token string">"46940C58B2F3AE426B77A297ABF4D31E"</span><span
+                class="token punctuation">,</span>
+  <span class="token property">"signType"</span><span class="token operator">:</span> <span
+                class="token string">"MD5"</span><span class="token punctuation">,</span>
+  <span class="token property">"reqTime"</span><span class="token operator">:</span> <span class="token string">"1624006009"</span><span
+                class="token punctuation">,</span>
+  <span class="token property">"mchNo"</span><span class="token operator">:</span> <span class="token string">"M1623984572"</span><span
+                class="token punctuation">,</span>
+  <span class="token property">"version"</span><span class="token operator">:</span> <span
+                class="token string">"1.0"</span>
+<span class="token punctuation">}</span>
+</code></pre>
+    <table>
+        <thead>
+        <tr>
+            <th>字段名</th>
+            <th>变量名</th>
+            <th>必填</th>
+            <th>类型</th>
+            <th>示例值</th>
+            <th>描述</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>返回状态</td>
+            <td>code</td>
+            <td>是</td>
+            <td>int</td>
+            <td>0</td>
+            <td>0-处理成功，其他-处理有误，详见错误码</td>
+        </tr>
+        <tr>
+            <td>返回信息</td>
+            <td>msg</td>
+            <td>否</td>
+            <td>String(128)</td>
+            <td>签名失败</td>
+            <td>具体错误原因，例如：签名失败、参数格式校验错误</td>
+        </tr>
+        <tr>
+            <td>签名信息</td>
+            <td>sign</td>
+            <td>否</td>
+            <td>String(32)</td>
+            <td>CCD9083A6DAD9A2DA9F668C3D4517A84</td>
+            <td>对data内数据签名,如data为空则不返回</td>
+        </tr>
+        <tr>
+            <td>返回数据</td>
+            <td>data</td>
+            <td>否</td>
+            <td>String(512)</td>
+            <td>{}</td>
+            <td>返回下单数据,json格式数据</td>
+        </tr>
+        </tbody>
+    </table>
+    <p><code>data数据格式</code></p>
+    <table>
+        <thead>
+        <tr>
+            <th>字段名</th>
+            <th>变量名</th>
+            <th>必填</th>
+            <th>类型</th>
+            <th>示例值</th>
+            <th>描述</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>支付订单号</td>
+            <td>payOrderId</td>
+            <td>是</td>
+            <td>String(30)</td>
+            <td>P12021022311124442600</td>
+            <td>返回支付系统订单号</td>
+        </tr>
+        <tr>
+            <td>商户号</td>
+            <td>mchNo</td>
+            <td>是</td>
+            <td>String(30)</td>
+            <td>M1621873433953</td>
+            <td>商户号</td>
+        </tr>
+        <tr>
+            <td>应用ID</td>
+            <td>appId</td>
+            <td>是</td>
+            <td>String(24)</td>
+            <td>60cc09bce4b0f1c0b83761c9</td>
+            <td>应用ID</td>
+        </tr>
+        <tr>
+            <td>商户订单号</td>
+            <td>mchOrderNo</td>
+            <td>是</td>
+            <td>String(30)</td>
+            <td>20160427210604000490</td>
+            <td>返回商户传入的订单号</td>
+        </tr>
+        <tr>
+            <td>产品编码</td>
+            <td>productCode</td>
+            <td>是</td>
+            <td>String(30)</td>
+            <td>10001</td>
+            <td>产品编码，具体见系统对接信息</td>
+        </tr>
+        <tr>
+            <td>支付金额</td>
+            <td>amount</td>
+            <td>是</td>
+            <td>int</td>
+            <td>100</td>
+            <td>支付金额,单位元</td>
+        </tr>
+        <tr>
+            <td>货币代码</td>
+            <td>currency</td>
+            <td>是</td>
+            <td>String(3)</td>
+            <td>cny</td>
+            <td>三位货币代码,人民币:cny</td>
+        </tr>
+        <tr>
+            <td>订单状态</td>
+            <td>state</td>
+            <td>是</td>
+            <td>int</td>
+            <td>2</td>
+            <td>支付订单状态<br>0-订单生成<br>1-支付中<br>2-支付成功<br>3-支付失败<br>6-订单关闭</td>
+        </tr>
+        <tr>
+            <td>客户端IP</td>
+            <td>clientIp</td>
+            <td>否</td>
+            <td>String(32)</td>
+            <td>210.73.10.148</td>
+            <td>客户端IPV4地址</td>
+        </tr>
+        <tr>
+            <td>扩展参数</td>
+            <td>extParam</td>
+            <td>否</td>
+            <td>String(512)</td>
+            <td>134586944573118714</td>
+            <td>商户扩展参数,回调时会原样返回</td>
+        </tr>
+        <tr>
+            <td>创建时间</td>
+            <td>createdAt</td>
+            <td>是</td>
+            <td>long</td>
+            <td>1622016572190</td>
+            <td>订单创建时间,13位时间戳</td>
+        </tr>
+        <tr>
+            <td>成功时间</td>
+            <td>successTime</td>
+            <td>否</td>
+            <td>long</td>
+            <td>1622016572190</td>
+            <td>订单支付成功时间,13位时间戳</td>
+        </tr>
+        </tbody>
+    </table>
+    <p><code>返回示例数据</code></p>
+    <pre data-role="codeBlock" data-info="json" class="language-json json"><code><span
+            class="token punctuation">{</span>
+  <span class="token property">"code"</span><span class="token operator">:</span> <span
+                class="token number">0</span><span class="token punctuation">,</span>
+  <span class="token property">"data"</span><span class="token operator">:</span> <span
+                class="token punctuation">{</span>
+    <span class="token property">"amount"</span><span class="token operator">:</span> <span
+                class="token number">100</span><span class="token punctuation">,</span>
+    <span class="token property">"appId"</span><span class="token operator">:</span> <span class="token string">"60cc09bce4b0f1c0b83761c9"</span><span
+                class="token punctuation">,</span>
+    <span class="token property">"clientIp"</span><span class="token operator">:</span> <span class="token string">"192.166.1.132"</span><span
+                class="token punctuation">,</span>
+    <span class="token property">"createdAt"</span><span class="token operator">:</span> <span class="token number">1623985457705</span><span
+                class="token punctuation">,</span>
+    <span class="token property">"currency"</span><span class="token operator">:</span> <span
+                class="token string">"cny"</span><span class="token punctuation">,</span>
+    <span class="token property">"extParam"</span><span class="token operator">:</span> <span
+                class="token string">""</span><span class="token punctuation">,</span>
+    <span class="token property">"productCode"</span><span class="token operator">:</span> <span class="token string">"10001"</span><span
+                class="token punctuation">,</span>
+    <span class="token property">"mchNo"</span><span class="token operator">:</span> <span class="token string">"M1623984572"</span><span
+                class="token punctuation">,</span>
+    <span class="token property">"mchOrderNo"</span><span class="token operator">:</span> <span class="token string">"mho1623985457320"</span><span
+                class="token punctuation">,</span>
+    <span class="token property">"payOrderId"</span><span class="token operator">:</span> <span class="token string">"A202106181104177050002"</span><span
+                class="token punctuation">,</span>
+    <span class="token property">"state"</span><span class="token operator">:</span> <span class="token number">2</span><span
+                class="token punctuation">,</span>
+    <span class="token property">"successTime"</span><span class="token operator">:</span> <span class="token number">1623985459000</span><
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">"msg"</span><span class="token operator">:</span> <span
+                class="token string">"SUCCESS"</span><span class="token punctuation">,</span>
+  <span class="token property">"sign"</span><span class="token operator">:</span> <span class="token string">"9548145EA12D0CD8C1628BCF44E19E0D"</span>
+<span class="token punctuation">}</span>
+</code></pre>
+
+    <h2 id="支付通知">支付通知 </h2>
+    <p>当订单支付成功时，系统会向商户系统发起回调通知。如果商户系统没有正确返回，系统会延迟再次通知。</p>
+    <blockquote>
+        <p>接口说明</p>
+    </blockquote>
+    <p>请求URL：该链接是通过统一下单接口提交的参数notifyUrl设置，如果无法访问链接，商户系统将无法接收到支付中心的通知。</p>
+    <p>请求方式：<code>POST</code></p>
+    <p>请求类型：<code>application/x-www-form-urlencoded</code></p>
+    <blockquote>
+        <p>通知参数</p>
+    </blockquote>
+    <table>
+        <thead>
+        <tr>
+            <th>字段名</th>
+            <th>变量名</th>
+            <th>必填</th>
+            <th>类型</th>
+            <th>示例值</th>
+            <th>描述</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>支付订单号</td>
+            <td>payOrderId</td>
+            <td>是</td>
+            <td>String(30)</td>
+            <td>P12021022311124442600</td>
+            <td>返回支付系统订单号</td>
+        </tr>
+        <tr>
+            <td>商户号</td>
+            <td>mchNo</td>
+            <td>是</td>
+            <td>String(30)</td>
+            <td>M1621873433953</td>
+            <td>商户号</td>
+        </tr>
+        <tr>
+            <td>应用ID</td>
+            <td>appId</td>
+            <td>是</td>
+            <td>String(24)</td>
+            <td>60cc09bce4b0f1c0b83761c9</td>
+            <td>应用ID</td>
+        </tr>
+        <tr>
+            <td>商户订单号</td>
+            <td>mchOrderNo</td>
+            <td>是</td>
+            <td>String(30)</td>
+            <td>20160427210604000490</td>
+            <td>返回商户传入的订单号</td>
+        </tr>
+        <tr>
+            <td>产品编码</td>
+            <td>productCode</td>
+            <td>是</td>
+            <td>String(30)</td>
+            <td>10001</td>
+            <td>产品编码，具体见系统对接信息</td>
+        </tr>
+        <tr>
+            <td>支付金额</td>
+            <td>amount</td>
+            <td>是</td>
+            <td>int</td>
+            <td>100</td>
+            <td>支付金额,单位元</td>
+        </tr>
+        <tr>
+            <td>货币代码</td>
+            <td>currency</td>
+            <td>是</td>
+            <td>String(3)</td>
+            <td>cny</td>
+            <td>三位货币代码,人民币:cny</td>
+        </tr>
+        <tr>
+            <td>订单状态</td>
+            <td>state</td>
+            <td>是</td>
+            <td>int</td>
+            <td>2</td>
+            <td>支付订单状态<br>0-订单生成<br>1-支付中<br>2-支付成功<br>3-支付失败<br>6-订单关闭</td>
+        </tr>
+        <tr>
+            <td>客户端IP</td>
+            <td>clientIp</td>
+            <td>否</td>
+            <td>String(32)</td>
+            <td>210.73.10.148</td>
+            <td>客户端IPV4地址</td>
+        </tr>
+        <tr>
+            <td>扩展参数</td>
+            <td>extParam</td>
+            <td>否</td>
+            <td>String(512)</td>
+            <td>134586944573118714</td>
+            <td>商户扩展参数</td>
+        </tr>
+        <tr>
+            <td>创建时间</td>
+            <td>createdAt</td>
+            <td>是</td>
+            <td>long</td>
+            <td>1622016572190</td>
+            <td>订单创建时间,13位时间戳</td>
+        </tr>
+        <tr>
+            <td>成功时间</td>
+            <td>successTime</td>
+            <td>否</td>
+            <td>long</td>
+            <td>1622016572190</td>
+            <td>订单支付成功时间,13位时间戳</td>
+        </tr>
+        <tr>
+            <td>通知请求时间</td>
+            <td>reqTime</td>
+            <td>是</td>
+            <td>String(30)</td>
+            <td>1622016572190</td>
+            <td>通知请求时间，,13位时间戳</td>
+        </tr>
+        <tr>
+            <td>签名</td>
+            <td>sign</td>
+            <td>是</td>
+            <td>String(32)</td>
+            <td>C380BEC2BFD727A4B6845133519F3AD6</td>
+            <td>签名值，详见签名算法</td>
+        </tr>
+        </tbody>
+    </table>
+    <p>&gt; 返回结果</p>
+    <p>业务系统处理后同步返回给支付中心，返回字符串 success 则表示成功，返回非success则表示处理失败，支付中心会再次通知业务系统。（通知频率为0/30/60/90/120/150,单位：秒）</p>
+    <p><code>注意：返回的字符串必须是小写，且前后不能有空格和换行符。</code></p>
+    <p><code>通知示例数据</code></p>
+    <pre data-role="codeBlock" data-info="json" class="language-json json"><code><span
+            class="token punctuation">{</span>
+    <span class="token property">"amount"</span><span class="token operator">:</span> <span
+                class="token number">5</span><span class="token punctuation">,</span>
+    <span class="token property">"clientIp"</span><span class="token operator">:</span> <span class="token string">"192.166.1.132"</span><span
+                class="token punctuation">,</span>
+    <span class="token property">"createdAt"</span><span class="token operator">:</span> <span class="token string">"1622016572190"</span><span
+                class="token punctuation">,</span>
+    <span class="token property">"currency"</span><span class="token operator">:</span> <span
+                class="token string">"cny"</span><span class="token punctuation">,</span>
+    <span class="token property">"extParam"</span><span class="token operator">:</span> <span
+                class="token string">""</span><span class="token punctuation">,</span>
+    <span class="token property">"productCode"</span><span class="token operator">:</span> <span
+                class="token string">"10001"</span><span class="token punctuation">,</span>
+    <span class="token property">"mchNo"</span><span class="token operator">:</span> <span class="token string">"M1621873433953"</span><span
+                class="token punctuation">,</span>
+    <span class="token property">"appId"</span><span class="token operator">:</span> <span class="token string">"60cc09bce4b0f1c0b83761c9"</span><span
+                class="token punctuation">,</span>
+    <span class="token property">"mchOrderNo"</span><span class="token operator">:</span> <span class="token string">"mho1621934803068"</span><span
+                class="token punctuation">,</span>
+    <span class="token property">"payOrderId"</span><span class="token operator">:</span> <span class="token string">"20210525172643357010"</span><span
+                class="token punctuation">,</span>
+    <span class="token property">"state"</span><span class="token operator">:</span> <span class="token number">3</span><span
+                class="token punctuation">,</span>
+    <span class="token property">"sign"</span><span class="token operator">:</span> <span class="token string">"C380BEC2BFD727A4B6845133519F3AD6"</span>
+<span class="token punctuation">}</span>
+</code></pre>
+
+    <h2 id="返回码">返回码 </h2>
+    <table>
+        <thead>
+        <tr>
+            <th>code</th>
+            <th>描述</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>0</td>
+            <td>成功</td>
+        </tr>
+        <tr>
+            <td>9999</td>
+            <td>异常，具体错误详见msg字段</td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+
+</body>
+</html>
